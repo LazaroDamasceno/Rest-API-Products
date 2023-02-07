@@ -22,7 +22,9 @@ public class ProductController {
         return prodRep.findById(id);
     }
 
-    //@PostMapping("/add")
-
+    @PostMapping("/add")
+    public ProductEntity add(@RequestBody ProductEntity product) {
+        return prodRep.save(product);
+    }
 
 }
