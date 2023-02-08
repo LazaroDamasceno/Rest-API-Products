@@ -29,7 +29,7 @@ public class ProductController {
 
     @PutMapping("/replace")
     public ProductEntity replace(@RequestBody ProductEntity product) {
-        prodRep.save(product);
+        return prodRep.save(product);
     }
 
     @DeleteMapping("/delete")
