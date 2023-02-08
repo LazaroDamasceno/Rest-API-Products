@@ -12,8 +12,8 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String prod_name;
-    private String prod_brand;
-    private String prod_type;
+    private String brand;
+    private String type;
     private int quantity;
     private int price;
 

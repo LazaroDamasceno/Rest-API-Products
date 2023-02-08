@@ -27,4 +27,14 @@ public class ProductController {
         return prodRep.save(product);
     }
 
+    @PutMapping("/replace")
+    public ProductEntity replace(@RequestBody ProductEntity product) {
+        prodRep.save(product);
+    }
+
+    @DeleteMapping("/delete")
+    public void delete(@RequestBody ProductEntity product) {
+        prodRep.delete(product);
+    }
+
 }
