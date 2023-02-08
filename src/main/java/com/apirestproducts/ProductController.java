@@ -27,7 +27,7 @@ public class ProductController {
         return prodRep.save(product);
     }
 
-    @PutMapping("/replace")
+    @PutMapping("/change)
     public ProductEntity replace(@RequestBody ProductEntity product) {
         return prodRep.save(product);
     }
