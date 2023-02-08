@@ -2,7 +2,7 @@
 
 ## Database
 
-1 - The databse used was the H2. 
+1 - The databse used was the H2.<br>
 2 - It's the local database of the Spring Boot. 
 3 - Every time the application is restarted, what was storaged is lost.
 
