@@ -1,8 +1,11 @@
 package com.apirestproducts;
 
+import jakarta.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products")
@@ -19,6 +22,26 @@ public class ProductController {
     @GetMapping("/all/{id}")
     public ProductEntity showById(@PathVariable(value="id") int id) {
         return prodRep.findById(id);
+    }
+
+    @GetMapping("/all/{first}/{last}")
+    public List<ProductEntity> showFromRangeById(@PathVariable(value = "first") int first,
+                                                 @PathVariable(value = "last") int last) {
+        List<ProductEntity> selectedEntities = new ArrayList<>();
+        for (int i = first; i < last; i++) {
+            selectedEntities.add(showById(i));
+        }
+        return selectedEntities;
+    }
+
+    @GetMapping("/all/{id}/brand")
+    public String getBrandById(@PathVariable(value = "id") int id) {
+        return showAll().get(id-1).getBrand();
+    }
+
+    @GetMapping("/all/brands")
+    public Map<Integer, String> getBrands() {
+        return showAll().stream().collect(Collectors.toMap(k -> k.getId(), v -> v.getBrand()));
     }
 
     @PostMapping("/add")
@@ -39,38 +62,6 @@ public class ProductController {
         return prodRep.save(product);
     }
 
-    @PutMapping("/change/{id}/brand/{brand}")
-    public ProductEntity replaceBrandById(@PathVariable(value = "id") int id,
-                                          @PathVariable(value = "brand") String brand) {
-        ProductEntity product = showById(id);
-        product.setBrand(brand);
-        return prodRep.save(product);
-    }
-
-    @PutMapping("/change/{id}/type/{type}")
-    public ProductEntity replaceTypeById(@PathVariable(value = "id") int id,
-                                         @PathVariable(value = "type") String type) {
-        ProductEntity product = showById(id);
-        product.setType(type);
-        return prodRep.save(product);
-    }
-
-    @PutMapping("/change/{id}/price/{price}")
-    public ProductEntity replacePriceById(@PathVariable(value = "id") int id,
-                                          @PathVariable(value = "price") int price) {
-        ProductEntity product = showById(id);
-        product.setPrice(price);
-        return prodRep.save(product);
-    }
-
-    @PutMapping("/change/{id}/quantity/{quantity}")
-    public ProductEntity replaceQuantityById(@PathVariable(value = "id") int id,
-                                             @PathVariable(value = "quantity") int quantity) {
-        ProductEntity product = showById(id);
-        product.setQuantity(quantity);
-        return prodRep.save(product);
-    }
-
     @PutMapping("/change/price/{price}")
     public String replaceAllPrices(@PathVariable(value = "price") int price) {
         ProductEntity product;
@@ -79,7 +70,7 @@ public class ProductController {
             product.setPrice(price);
             prodRep.save(product);
         }
-        return "200 OK";
+        return Constants.HTTP_200;
     }
 
     @PutMapping("/change/quantity/{quantity}")
@@ -90,7 +81,7 @@ public class ProductController {
             product.setQuantity(quantity);
             prodRep.save(product);
         }
-        return "200 OK";
+        return Constants.HTTP_200;
     }
 
     @PutMapping("/change/{firstIndex}/{lastIndex}/price/{price}")
@@ -103,19 +94,19 @@ public class ProductController {
             product.setPrice(price);
             prodRep.save(product);
         }
-        return "200 OK";
+        return Constants.HTTP_200;
     }
 
     @DeleteMapping("/delete")
     public String delete(@RequestBody ProductEntity product) {
         prodRep.delete(product);
-        return "200 OK";
+        return Constants.HTTP_200;
     }
 
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable(value = "id") int id) {
         prodRep.deleteById(id);
-        return "200 OK";
+        return Constants.HTTP_200;
     }
 
 }
