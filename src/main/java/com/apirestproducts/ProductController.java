@@ -37,4 +37,9 @@ public class ProductController {
         prodRep.delete(product);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable(value = "id") int id) {
+        prodRep.deleteById(id);
+    }
+
 }
