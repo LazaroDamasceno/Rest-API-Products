@@ -39,7 +39,7 @@ public class ProductController {
         return showAll().get(id-1).getBrand();
     }
 
-    @GetMapping("/all/{id}/{column}")
+    /*@GetMapping("/all/{id}/{column}")
     public Object getColumnById(@PathVariable(value = "id") int id,
                                 @PathVariable(value = "column") String column) {
         Object ans = null;
@@ -49,7 +49,7 @@ public class ProductController {
         if (column.equals("price")) ans = showById(id).getPrice();
         if (column.equals("quantity")) ans = showById(id).getQuantity();
         return ans;
-    }
+    }*/
 
     @GetMapping("/all/brands")
     public Map<Integer, String> getBrands() {
