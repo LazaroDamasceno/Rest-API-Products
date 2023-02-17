@@ -32,35 +32,35 @@ public class ProductController {
         return prodRep.save(product);
     }
 
-    @PutMapping("/id/{id}/change/{name}")
+    @PutMapping("/id/{id}/change/name/{name}")
     public ProductEntity replaceNameById(@PathVariable(value = "id") int id, @PathVariable(value = "name") String name) {
         ProductEntity product = showById(id);
         product.setName(name);
         return prodRep.save(product);
     }
 
-    @PutMapping("/id/{id}/change/{brand}")
+    @PutMapping("/id/{id}/change/brand/{brand}")
     public ProductEntity replaceBrandById(@PathVariable(value = "id") int id, @PathVariable(value = "brand") String brand) {
         ProductEntity product = showById(id);
         product.setBrand(brand);
         return prodRep.save(product);
     }
 
-    @PutMapping("/id/{id}/change/{type}")
+    @PutMapping("/id/{id}/change/type/{type}")
     public ProductEntity replaceTypeById(@PathVariable(value = "id") int id, @PathVariable(value = "type") String type) {
         ProductEntity product = showById(id);
         product.setType(type);
         return prodRep.save(product);
     }
 
-    @PutMapping("/id/{id}/change/{price}")
+    @PutMapping("/id/{id}/change/price/{price}")
     public ProductEntity replacePriceById(@PathVariable(value = "id") int id, @PathVariable(value = "price") int price) {
         ProductEntity product = showById(id);
         product.setPrice(price);
         return prodRep.save(product);
     }
 
-    @PutMapping("/change/quantity/{id}/{quantity}")
+    @PutMapping("/id/{id}/change/quantity/{quantity}")
     public ProductEntity replaceQuantityById(@PathVariable(value = "id") int id, @PathVariable(value = "quantity") int quantity) {
         ProductEntity product = showById(id);
         product.setQuantity(quantity);
