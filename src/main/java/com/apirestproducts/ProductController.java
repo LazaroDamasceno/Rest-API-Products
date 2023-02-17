@@ -98,13 +98,15 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody ProductEntity product) {
+    public String delete(@RequestBody ProductEntity product) {
         prodRep.delete(product);
+        return "200 OK";
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable(value = "id") int id) {
+    public String delete(@PathVariable(value = "id") int id) {
         prodRep.deleteById(id);
+        return "200 OK";
     }
 
 }
