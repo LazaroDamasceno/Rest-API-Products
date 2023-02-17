@@ -39,18 +39,6 @@ public class ProductController {
         return showAll().get(id-1).getBrand();
     }
 
-    /*@GetMapping("/all/{id}/{column}")
-    public Object getColumnById(@PathVariable(value = "id") int id,
-                                @PathVariable(value = "column") String column) {
-        Object ans = null;
-        if (column.equals("name")) ans = showById(id).getName();
-        if (column.equals("type")) ans = showById(id).getType();
-        if (column.equals("brand")) ans = showById(id).getBrand();
-        if (column.equals("price")) ans = showById(id).getPrice();
-        if (column.equals("quantity")) ans = showById(id).getQuantity();
-        return ans;
-    }*/
-
     @GetMapping("/all/brands")
     public Map<Integer, String> getBrands() {
         return showAll().stream().collect(Collectors.toMap(k -> k.getId(), v -> v.getBrand()));
