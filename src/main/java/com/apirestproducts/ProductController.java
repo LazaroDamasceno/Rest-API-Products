@@ -84,6 +84,17 @@ public class ProductController {
         return "200 OK";
     }
 
+    @PutMapping("/change/quantity/{quantity}")
+    public String replaceAllQuantities(@PathVariable(value = "quantity") int quantity) {
+        ProductEntity product;
+        for (int i = 1; i <= showAll().size(); i++) {
+            product = showById(i);
+            product.setQuantity(quantity);
+            prodRep.save(product);
+        }
+        return "200 OK";
+    }
+
     @PutMapping("/change/{firstIndex}/{lastIndex}/price/{price}")
     public String replacePricesOfARange(@PathVariable(value = "price") int price,
                                       @PathVariable(value = "firstIndex") int firstIndex,
